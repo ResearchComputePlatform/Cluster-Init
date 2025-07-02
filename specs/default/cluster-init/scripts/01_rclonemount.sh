@@ -20,13 +20,19 @@ read_os
 case $os_release in
     almalinux)
         logger -s  "Not Implemented"
-        exit 0
         ;;
     ubuntu)
         #no terminal
+        # check if rclone fonfig file exists
+        if [ -f /home/hpcadmin/.config/rclone/rclone.conf ]; then
+            logger -s "Rclone configuration file found. "
+            mkdir /mnt/Dropbox
+            chown hpcadmin:hpcadmin /mnt/Dropbox
+            chmod 755 /mnt/Dropbox
+            rclone mount DB:/ /mnt/Dropbox --daemon --links --vfs-cache-mode=full --vfs-cache-max-age 24h0m0s --vfs-fast-fingerprint --vfs-read-ahead 128M --transfers 16 --vfs-read-chunk-size 128M --buffer-size 256M --vfs-read-chunk-streams 32 &
 
-        apt-get update
-        apt-get install -y moreutils
+            exit 0
+        fi
         exit 0
         ;;
     *)
