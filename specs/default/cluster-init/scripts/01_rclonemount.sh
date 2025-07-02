@@ -24,7 +24,7 @@ case $os_release in
     ubuntu)
         #no terminal
         # check if rclone fonfig file exists
-        if [ -f /home/hpcadmin/.config/rclone/rclone.conf ]; then
+        if [ -f /shared/home/hpcadmin/.config/rclone/rclone.conf ]; then
             logger -s "Rclone configuration file found. "
             mkdir /mnt/Dropbox
             chown hpcadmin:hpcadmin /mnt/Dropbox
