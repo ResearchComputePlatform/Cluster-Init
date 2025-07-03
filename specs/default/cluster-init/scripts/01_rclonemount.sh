@@ -29,7 +29,7 @@ case $os_release in
             mkdir /mnt/Dropbox
             chown hpcadmin:hpcadmin /mnt/Dropbox
             chmod 755 /mnt/Dropbox
-            rclone mount DB:/ /mnt/Dropbox --daemon --links --vfs-cache-mode=full --vfs-cache-max-age 24h0m0s --vfs-fast-fingerprint --vfs-read-ahead 128M --transfers 16 --vfs-read-chunk-size 128M --buffer-size 256M --vfs-read-chunk-streams 32 --config="/shared/home/hpcadmin/.config/rclone/rclone.conf"
+            su - hpcadmin -c 'rclone mount DB:/ /mnt/Dropbox --daemon --links --vfs-cache-mode=full --vfs-cache-max-age 24h0m0s --vfs-fast-fingerprint --vfs-read-ahead 128M --transfers 16 --vfs-read-chunk-size 128M --buffer-size 256M --vfs-read-chunk-streams 32 --config="/shared/home/hpcadmin/.config/rclone/rclone.conf"'
 
             exit 0
         fi
