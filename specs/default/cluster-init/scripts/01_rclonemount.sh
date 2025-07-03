@@ -29,9 +29,9 @@ case $os_release in
         script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
         # check service file is there
         if [ ! -f /shared/home/hpcadmin/.config/systemd/user/rclone@.service ]; then
-            logger -s "Rclone configuration file not found. Please run the rclone configuration script first."
+            logger -s "Rclone configuration file not found. "
             mkdir -p  /shared/home/hpcadmin/.config/systemd/user
-            cp $script_dir/..files/ubuntu/rclone@.service /shared/home/hpcadmin/.config/systemd/user/rclone@.service
+            cp $script_dir/../files/ubuntu/rclone@.service /shared/home/hpcadmin/.config/systemd/user/rclone@.service
        
         fi
         

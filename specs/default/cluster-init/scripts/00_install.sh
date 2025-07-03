@@ -26,7 +26,7 @@ case $os_release in
         #no terminal
 
         apt-get update
-        apt-get install -y moreutils
+        apt-get install -y moreutils nethogs 
         exit 0
         ;;
     *)
