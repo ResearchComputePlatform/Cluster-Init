@@ -30,6 +30,7 @@ case $os_release in
         if [ -f /shared/home/hpcadmin/.config/rclone/rclone.conf ]; then
             logger -s "Rclone configuration file found. "
             mkdir -p /mnt/dropbox
+            mkdir -p  /shared/home/hpcadmin/.config/systemd/user
             chown hpcadmin:hpcadmin /mnt/dropbox
             chmod 755 /mnt/dropbox
             cp files/ubuntu/rclone@.service /shared/home/hpcadmin/.config/systemd/user/rclone@.service
