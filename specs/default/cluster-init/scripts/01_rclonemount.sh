@@ -26,10 +26,13 @@ case $os_release in
         # check if rclone fonfig file exists
         if [ -f /shared/home/hpcadmin/.config/rclone/rclone.conf ]; then
             logger -s "Rclone configuration file found. "
-            mkdir /mnt/Dropbox
-            chown hpcadmin:hpcadmin /mnt/Dropbox
-            chmod 755 /mnt/Dropbox
-            su - hpcadmin -c 'rclone mount DB:/ /mnt/Dropbox --daemon --links --vfs-cache-mode=full --vfs-cache-max-age 24h0m0s --vfs-fast-fingerprint --vfs-read-ahead 128M --transfers 16 --vfs-read-chunk-size 128M --buffer-size 256M --vfs-read-chunk-streams 32 --config="/shared/home/hpcadmin/.config/rclone/rclone.conf"'
+            mkdir /mnt/dropbox
+            chown hpcadmin:hpcadmin /mnt/dropbox
+            chmod 755 /mnt/dropbox
+            cp files/ubuntu/rclone@.service /shared/home/hpcadmin/.config/systemd/user/rclone@.service
+            # systemctl --user daemon-reload
+            # systemctl --user enable --now rclone@Dropbox
+            # su - hpcadmin -c 'rclone mount DB:/ /mnt/dropbox --daemon --links --vfs-cache-mode=full --vfs-cache-max-age 24h0m0s --vfs-fast-fingerprint --vfs-read-ahead 128M --transfers 16 --vfs-read-chunk-size 128M --buffer-size 256M --vfs-read-chunk-streams 32 --config="/shared/home/hpcadmin/.config/rclone/rclone.conf"'
 
             exit 0
         fi
