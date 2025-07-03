@@ -26,7 +26,7 @@ case $os_release in
         # check if rclone fonfig file exists
         if [ -f /shared/home/hpcadmin/.config/rclone/rclone.conf ]; then
             logger -s "Rclone configuration file found. "
-            mkdir /mnt/dropbox
+            mkdir -p /mnt/dropbox
             chown hpcadmin:hpcadmin /mnt/dropbox
             chmod 755 /mnt/dropbox
             cp files/ubuntu/rclone@.service /shared/home/hpcadmin/.config/systemd/user/rclone@.service
