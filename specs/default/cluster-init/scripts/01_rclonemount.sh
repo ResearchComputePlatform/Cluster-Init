@@ -31,15 +31,15 @@ case $os_release in
         if [ ! -f /shared/home/hpcadmin/.config/systemd/user/rclone@.service ]; then
             logger -s "Rclone configuration file not found. "
             mkdir -p  /shared/home/hpcadmin/.config/systemd/user
-            cp $script_dir/../files/ubuntu/rclone@.service /shared/home/hpcadmin/.config/systemd/user/rclone@.service
+            cp $script_dir/../files/ubuntu/rclone@.service /shared/home/hpcadmin/.config/systemd/user/rclone@.service || true
        
         fi
         
         mkdir -p /mnt/dropbox
         chown hpcadmin:hpcadmin /mnt/dropbox
         chmod 755 /mnt/dropbox
-        su - hpcadmin -c 'systemctl --user daemon-reload'
-        su - hpcadmin -c 'systemctl --user enable --now rclone@dropbox'
+        su - hpcadmin -c 'systemctl --user daemon-reload' || true
+        su - hpcadmin -c 'systemctl --user enable --now rclone@dropbox' || true
         # su - hpcadmin -c 'rclone mount DB:/ /mnt/dropbox --daemon --links --vfs-cache-mode=full --vfs-cache-max-age 24h0m0s --vfs-fast-fingerprint --vfs-read-ahead 128M --transfers 16 --vfs-read-chunk-size 128M --buffer-size 256M --vfs-read-chunk-streams 32 --config="/shared/home/hpcadmin/.config/rclone/rclone.conf"'
 
         exit 0
