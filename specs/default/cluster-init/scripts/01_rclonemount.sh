@@ -23,6 +23,9 @@ case $os_release in
         ;;
     ubuntu)
         #no terminal
+        env | sort
+        id 
+        pwd
         # check if rclone fonfig file exists
         if [ -f /shared/home/hpcadmin/.config/rclone/rclone.conf ]; then
             logger -s "Rclone configuration file found. "
