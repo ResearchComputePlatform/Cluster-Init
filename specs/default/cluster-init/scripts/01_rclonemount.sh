@@ -26,16 +26,20 @@ case $os_release in
         env | sort
         id 
         pwd
-        # check if rclone fonfig file exists
-        # if [ -f /shared/home/hpcadmin/.config/rclone/rclone.conf ]; then
-        logger -s "Rclone configuration file found. "
+        script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+        # check service file is there
+        if [ ! -f /shared/home/hpcadmin/.config/systemd/user/rclone@.service ]; then
+            logger -s "Rclone configuration file not found. Please run the rclone configuration script first."
+            mkdir -p  /shared/home/hpcadmin/.config/systemd/user
+            cp $script_dir/..files/ubuntu/rclone@.service /shared/home/hpcadmin/.config/systemd/user/rclone@.service
+       
+        fi
+        
         mkdir -p /mnt/dropbox
-        mkdir -p  /shared/home/hpcadmin/.config/systemd/user
         chown hpcadmin:hpcadmin /mnt/dropbox
         chmod 755 /mnt/dropbox
-        cp files/ubuntu/rclone@.service /shared/home/hpcadmin/.config/systemd/user/rclone@.service
-        # systemctl --user daemon-reload
-        # systemctl --user enable --now rclone@Dropbox
+        su - hpcadmin -c 'systemctl --user daemon-reload'
+        su - hpcadmin -c 'systemctl --user enable --now rclone@dropbox'
         # su - hpcadmin -c 'rclone mount DB:/ /mnt/dropbox --daemon --links --vfs-cache-mode=full --vfs-cache-max-age 24h0m0s --vfs-fast-fingerprint --vfs-read-ahead 128M --transfers 16 --vfs-read-chunk-size 128M --buffer-size 256M --vfs-read-chunk-streams 32 --config="/shared/home/hpcadmin/.config/rclone/rclone.conf"'
 
         exit 0
