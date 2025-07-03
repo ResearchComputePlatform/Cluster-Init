@@ -27,20 +27,20 @@ case $os_release in
         id 
         pwd
         # check if rclone fonfig file exists
-        if [ -f /shared/home/hpcadmin/.config/rclone/rclone.conf ]; then
-            logger -s "Rclone configuration file found. "
-            mkdir -p /mnt/dropbox
-            mkdir -p  /shared/home/hpcadmin/.config/systemd/user
-            chown hpcadmin:hpcadmin /mnt/dropbox
-            chmod 755 /mnt/dropbox
-            cp files/ubuntu/rclone@.service /shared/home/hpcadmin/.config/systemd/user/rclone@.service
-            # systemctl --user daemon-reload
-            # systemctl --user enable --now rclone@Dropbox
-            # su - hpcadmin -c 'rclone mount DB:/ /mnt/dropbox --daemon --links --vfs-cache-mode=full --vfs-cache-max-age 24h0m0s --vfs-fast-fingerprint --vfs-read-ahead 128M --transfers 16 --vfs-read-chunk-size 128M --buffer-size 256M --vfs-read-chunk-streams 32 --config="/shared/home/hpcadmin/.config/rclone/rclone.conf"'
+        # if [ -f /shared/home/hpcadmin/.config/rclone/rclone.conf ]; then
+        logger -s "Rclone configuration file found. "
+        mkdir -p /mnt/dropbox
+        mkdir -p  /shared/home/hpcadmin/.config/systemd/user
+        chown hpcadmin:hpcadmin /mnt/dropbox
+        chmod 755 /mnt/dropbox
+        cp files/ubuntu/rclone@.service /shared/home/hpcadmin/.config/systemd/user/rclone@.service
+        # systemctl --user daemon-reload
+        # systemctl --user enable --now rclone@Dropbox
+        # su - hpcadmin -c 'rclone mount DB:/ /mnt/dropbox --daemon --links --vfs-cache-mode=full --vfs-cache-max-age 24h0m0s --vfs-fast-fingerprint --vfs-read-ahead 128M --transfers 16 --vfs-read-chunk-size 128M --buffer-size 256M --vfs-read-chunk-streams 32 --config="/shared/home/hpcadmin/.config/rclone/rclone.conf"'
 
-            exit 0
-        fi
         exit 0
+        # fi
+        # exit 0
         ;;
     *)
         logger -s "Untested OS $os_release $os_version"
