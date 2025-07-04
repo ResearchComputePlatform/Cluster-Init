@@ -36,6 +36,9 @@ case $os_release in
         fi
         
         chown -R hpcadmin:hpcadmin /shared/home/hpcadmin/.config/systemd
+        mkdir -p /shared/home/hpcadmin/.config/rclone 
+        touch /shared/home/hpcadmin/.config/rclone/rclone.conf 
+        chown -R hpcadmin:hpcadmin /shared/home/hpcadmin/.config
         #Incase rclone has already mounted
         if [ ! -d /mnt/dropbox ]; then
             mkdir -p /mnt/dropbox || true
