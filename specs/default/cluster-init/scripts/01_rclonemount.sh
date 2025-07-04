@@ -35,11 +35,18 @@ case $os_release in
        
         fi
         
-        mkdir -p /mnt/dropbox
+        chown -R hpcadmin:hpcadmin /shared/home/hpcadmin/.config/systemd
+        #Incase rclone has already mounted
+        if [ ! -d /mnt/dropbox ]; then
+            mkdir -p /mnt/dropbox || true
+        fi
         chown hpcadmin:hpcadmin /mnt/dropbox
         chmod 755 /mnt/dropbox
-        su - hpcadmin -c 'systemctl --user daemon-reload' || true
-        su - hpcadmin -c 'systemctl --user enable --now rclone@dropbox' || true
+        # sudo -u hpcadmin  'systemctl --user daemon-reload' || true
+        systemctl --user daemon-reload --machine=hpcadmin@.host --user
+        # machinectl --user enable --now rclone@dropbox || true
+        # sudo -u hpcadmin 'systemctl --user enable --now rclone@dropbox' || true
+        systemctl --user enable --now rclone@dropbox --machine=hpcadmin@.host --user
         # su - hpcadmin -c 'rclone mount DB:/ /mnt/dropbox --daemon --links --vfs-cache-mode=full --vfs-cache-max-age 24h0m0s --vfs-fast-fingerprint --vfs-read-ahead 128M --transfers 16 --vfs-read-chunk-size 128M --buffer-size 256M --vfs-read-chunk-streams 32 --config="/shared/home/hpcadmin/.config/rclone/rclone.conf"'
 
         exit 0

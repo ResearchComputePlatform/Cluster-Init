@@ -26,7 +26,9 @@ case $os_release in
         #no terminal
 
         apt-get update
-        apt-get install -y moreutils  
+        apt-get install -y moreutils 
+        apt-get install -y systemd-container 
+        apt-get install -y moreutils
         exit 0
         ;;
     *)
