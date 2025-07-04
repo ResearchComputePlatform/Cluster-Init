@@ -45,11 +45,12 @@ case $os_release in
         fi
         chown hpcadmin:hpcadmin /mnt/dropbox
         chmod 755 /mnt/dropbox
+        loginctl enable-linger hpcadmin
         # sudo -u hpcadmin  'systemctl --user daemon-reload' || true
-        # systemctl --user daemon-reload --machine=hpcadmin@.host --user
+        systemctl --user daemon-reload --machine=hpcadmin@.host --user
         # machinectl --user enable --now rclone@dropbox || true
         # sudo -u hpcadmin 'systemctl --user enable --now rclone@dropbox' || true
-        # systemctl --user enable --now rclone@dropbox --machine=hpcadmin@.host --user
+        systemctl --user enable --now rclone@dropbox --machine=hpcadmin@.host --user
         # su - hpcadmin -c 'rclone mount DB:/ /mnt/dropbox --daemon --links --vfs-cache-mode=full --vfs-cache-max-age 24h0m0s --vfs-fast-fingerprint --vfs-read-ahead 128M --transfers 16 --vfs-read-chunk-size 128M --buffer-size 256M --vfs-read-chunk-streams 32 --config="/shared/home/hpcadmin/.config/rclone/rclone.conf"'
 
         exit 0

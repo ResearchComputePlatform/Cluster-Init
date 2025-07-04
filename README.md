@@ -20,3 +20,7 @@ systemctl --user enable --now rclone@dropbox
 
 
 journalctl -u rclone@dropbox -f
+
+
+
+ /usr/local/bin/cyclecloud show_cluster
